@@ -19,6 +19,4 @@ export class AppComponent implements OnInit {
       complete: () => console.log('request complete')
     });
   }
-
-  
 }
