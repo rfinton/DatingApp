@@ -34,8 +34,8 @@ namespace API.Controllers
             var user = new AppUser
             {
                 UserName = registerDto.UserName.ToLower(),
-                // PasswordHash = hmac.ComputeHash(Encoding.UTF8.GetBytes(registerDto.Password)),
-                // PasswordSalt = hmac.Key
+                PasswordHash = hmac.ComputeHash(Encoding.UTF8.GetBytes(registerDto.Password)),
+                PasswordSalt = hmac.Key
             };
 
             _context.Users.Add(user);
@@ -54,7 +54,7 @@ namespace API.Controllers
 
             if (user == null)
             {
-                return Unauthorized();
+                return Unauthorized("username not found");
             }
 
             using var hmac = new HMACSHA512(user.PasswordSalt);
@@ -64,7 +64,7 @@ namespace API.Controllers
             {
                 if (computedHash[i] != user.PasswordHash[i])
                 {
-                    return Unauthorized();
+                    return Unauthorized("invalid password");
                 }
             }
 
