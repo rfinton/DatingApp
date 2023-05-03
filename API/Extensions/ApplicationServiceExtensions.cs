@@ -1,3 +1,4 @@
+using API.Converters;
 using API.Data;
 using API.Helpers;
 using API.Interfaces;
@@ -23,6 +24,11 @@ namespace API.Extensions
             services.AddScoped<IPhotoService, PhotoService>();
             services.AddScoped<LogUserActivity>();
             services.AddScoped<ILikesRepository, LikesRepository>();
+            services.AddControllers().AddJsonOptions(options =>
+            {
+                options.JsonSerializerOptions.Converters.Add(new DateOnlyJsonConverter());
+            });
+            services.AddScoped<IMessageRepository, MessageRepository>();
             
             return services;
         }        

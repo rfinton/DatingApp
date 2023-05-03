@@ -1,0 +1,12 @@
+thead {
+	border-bottom: solid 1px #fff;
+	height: 50px;
+}
+
+td {
+	padding: 15px 0;
+}
+
+.img-circle {
+	max-height: 50px;
+}
